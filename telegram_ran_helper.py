@@ -14,12 +14,6 @@ from telegram.ext import CommandHandler, MessageHandler, CallbackQueryHandler
 logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', datefmt='%Y.%m.%d %I:%M:%S %p', level=logging.DEBUG)
 
 
-# contains icq bot work code. Vitrina code: 739b2096-3845-4283-ad0f-31c75b4a5745
-
-# =============================================================================
-# start bot
-
-
 class FormulaTg(object):
     def __init__(self, tg_token):
         self.updater = None
@@ -150,9 +144,9 @@ class FormulaTg(object):
             netmask = str(net.netmask())
             size = str(net.size() - 2)
             size = "1" if int(size) < 1 else size
-            host_minmax = f"\nfirst: <code>{str(net.host_first())}</code> \nlast: <code>{str(net.host_last())}</code>" if int(size) > 1 else ""
-            result = f"<code>{str(net.to_ipv4())}</code> :belongs to \nnet <code>{guess_network}</code> \nmask {netmask}" \
-                     f"\nthere are {size} hosts <code>" + host_minmax + "</code>"
+            host_minmax = f"\nfirst: {str(net.host_first())} \nlast: {str(net.host_last())}" if int(size) > 1 else ""
+            result = f"{str(net.to_ipv4())} :belongs to \nnet {guess_network} \nmask {netmask}" \
+                     f"\nthere are {size} hosts " + host_minmax + ""
             return result
         except Exception as e:
             return ip + " :Error! Check input value: " + str(e)
