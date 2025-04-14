@@ -5,18 +5,19 @@ This is a Telegram bot that assists radio engineers in various...
 - converting dBm to watts and vice versa,
 - calculating eNodeB from ECI, 
 - describing IP networks.
+- daemon and simple script mode
 
 ## Installation
 ```
 git clone https://github.com/innightwolfsleep/telegram_ran_helper
 cd telegram_ran_helper
-pip install python-telegram-bot==13.15 ipcalc
+pip install python-telegram-bot==13.15 ipcalc python-daemon
 ```
 
 ### Running
 
 1. **Obtain a token for your Telegram bot**: Create a new bot in [BotFather](https://t.me/BotFather) and get the token.
-2. **Run the bot**:
+2. **Run the bot (as daemon)**:
 ```
-python telegram_ran_helper.py <your_tg_token>
+python telegram_ran_helper.py <your_tg_token> y
 ```
