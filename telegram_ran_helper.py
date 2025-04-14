@@ -66,11 +66,12 @@ class FormulaTg(object):
         chatId = upd.message.chat.id
         if len(re.findall(r"\d", text)) and not len(re.findall(r"\D", text)):
             buttons = self.get_fm_options_button()
-            context.bot.send_message(chat_id=chatId, text=text, reply_markup=buttons)
+            context.bot.send_message(chat_id=chatId, text=text, reply_markup=buttons, parse_mode="HTML")
         elif len(re.findall(r"\d+\.\d+\.\d+\.\d+/\d+|\d+\.\d+\.\d+\.\d+", text)):
             ip = re.findall(r"\d+\.\d+\.\d+\.\d+/\d+|\d+\.\d+\.\d+\.\d+", text)
             text = self.ip_formula_processing(ip[0])
-            context.bot.send_message(chat_id=chatId, text=text, reply_markup=self.get_ip_options_button())
+            context.bot.send_message(chat_id=chatId, text=text, reply_markup=self.get_ip_options_button(),
+                                     parse_mode="HTML")
         else:
             pass
 
@@ -149,9 +150,9 @@ class FormulaTg(object):
             netmask = str(net.netmask())
             size = str(net.size() - 2)
             size = "1" if int(size) < 1 else size
-            host_minmax = f"\nfirst: {str(net.host_first())} \nlast: {str(net.host_last())}" if int(size) > 1 else ""
-            result = f"{str(net.to_ipv4())} :belongs to \nnet {guess_network} \nmask {netmask}" \
-                     f"\nthere are {size} hosts" + host_minmax
+            host_minmax = f"\nfirst: <code>{str(net.host_first())}</code> \nlast: <code>{str(net.host_last())}</code>" if int(size) > 1 else ""
+            result = f"<code>{str(net.to_ipv4())}</code> :belongs to \nnet <code>{guess_network}</code> \nmask {netmask}" \
+                     f"\nthere are {size} hosts <code>" + host_minmax + "</code>"
             return result
         except Exception as e:
             return ip + " :Error! Check input value: " + str(e)
@@ -232,7 +233,7 @@ class FormulaTg(object):
                 result = "Error! Check input value: " + str(e)
         elif option == "ECGI":
             try:
-                result = convert_ecgi_to_plmn_and_eci(int(text))
+                result = self.convert_ecgi_to_plmn_and_eci(int(text))
             except Exception as e:
                 result = "Error! Check input value: " + str(e)
         return text + ": " + result
