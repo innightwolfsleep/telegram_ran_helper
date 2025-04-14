@@ -351,11 +351,13 @@ Example:
         sys.exit(1)
 
     tg_token = sys.argv[1]
-    daemon = sys.argv[1].capitalize()
+    daemon = sys.argv[2].capitalize()
     if daemon == "Y":
         with DaemonContext():
+            print("RUNING AS DAEMON")
             FormulaTg(tg_token)
     else:
+        print("RUNING AS DAEMON")
         FormulaTg(tg_token)
 
 
