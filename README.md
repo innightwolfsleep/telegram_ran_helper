@@ -8,7 +8,7 @@ This is a Telegram bot that assists radio engineers in various...
 
 ## Installation
 ```
-git clone https://github.com/yourusername/telegram-ran-helper.git
+git clone https://github.com/innightwolfsleep/telegram-ran-helper.git
 cd telegram-ran-helper
 pip install python-telegram-bot ipcalc
 ```
