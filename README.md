@@ -11,7 +11,7 @@ This is a Telegram bot that assists radio engineers in various...
 ```
 git clone https://github.com/innightwolfsleep/telegram_ran_helper
 cd telegram_ran_helper
-pip install python-telegram-bot==13.15 ipcalc python-daemon
+pip install -r requirements.txt
 ```
 
 ### Running
