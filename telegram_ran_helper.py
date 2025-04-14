@@ -5,6 +5,7 @@ import re
 import logging
 import math
 from ipcalc import Network
+from daemon import DaemonContext
 from threading import Thread
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext, Filters, Updater
@@ -335,12 +336,27 @@ class FormulaTg(object):
 
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: telegram_ran_helper.py <tg_token>")
+    if len(sys.argv) != 3:
+        print("""
+Usage: 
+    telegram_ran_helper.py <tg_token> <daemon>
+
+Where:
+    tg_token - your telegram bot token
+    daemon - if 'y' then running as daemon else - as script
+
+Example:
+    python3.10 telegram_ran_helper.py 1234567890:qwertyqwertyqwerty123 y
+""")
         sys.exit(1)
 
     tg_token = sys.argv[1]
-    FormulaTg(tg_token)
+    daemon = sys.argv[1].capitalize()
+    if daemon == "Y":
+        with DaemonContext():
+            FormulaTg(tg_token)
+    else:
+        FormulaTg(tg_token)
 
 
 if __name__ == "__main__":
